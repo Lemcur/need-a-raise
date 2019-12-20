@@ -74,6 +74,8 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
+    doorkeeper (5.2.3)
+      railties (>= 5)
     erubi (1.8.0)
     execjs (2.7.0)
     ffi (1.11.1)
@@ -107,7 +109,7 @@ GEM
     pg (1.1.4)
     public_suffix (3.1.1)
     puma (3.12.1)
-    rack (2.0.7)
+    rack (2.0.8)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.3)
@@ -196,6 +198,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   chromedriver-helper
   coffee-rails (~> 4.2)
+  doorkeeper
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   pg
