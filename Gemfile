@@ -33,3 +33,8 @@ end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'doorkeeper'
+gem 'pry'
+gem 'devise'
+gem 'grape'
+gem "grape-jsonapi-resources"
+gem 'rack-cors', require: 'rack/cors'

@@ -1,0 +1,51 @@
+version: '3.7'
+
+x-app-common:
+  &common-app-settings
+  build:
+    context: ./
+    dockerfile: Dockerfile
+  command: >
+    dumb-init bash -c "
+      (bundle check || bundle install) &&
+      rake db:migrate &&
+      bundle exec puma -p 80 -C config/puma.rb"
+  volumes:
+    - bundle:/usr/local/bundle
+    - /app/tmp/cache
+  tty: true
+  stdin_open: true
+
+services:
+  web:
+    << : *common-app-settings
+    networks:
+      - backend
+    ports:
+      - "3100:80"
+    environment:
+      VIRTUAL_HOST: ".need-a-raise.test, .short.test"
+      VIRTUAL_PORT: "3000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:11-alpine
+    volumes:
+      - db_data_11:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+    environment:
+      POSTGRES_PASSWORD: ""
+      POSTGRES_DB: "need-a-raise"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+
+networks:
+  backend:
+    external: true
+
+volumes:
+  db_data_11:
+  bundle:
